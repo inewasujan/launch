@@ -1,12 +1,14 @@
 import React from 'react'
 import Header from './header'
 import Footer from './footer'
-import { Form, Input, Icon, Button } from 'antd'
+import { Form, Input, Icon, Button, Select } from 'antd'
 
+const { Option } = Select
 class BankCheck extends React.Component {
     constructor() {
         super()
         this.state = {
+            bankName: 'bank_of_statements',
             clientNumber: '',
             password: ''
         }
@@ -31,21 +33,31 @@ class BankCheck extends React.Component {
 
     handleSubmit(e){
         e.preventDefault();
+        // const inst = bank_of_statements;
+        const bankName = this.state.bankName
         const clientNo = this.state.clientNumber
         const pass = this.state.password;
-        console.log("Submitted Values: " + clientNo + " " + pass);
+        console.log("Submitted Values: " + bankName + " " + clientNo + " " + pass);
 
         //post
 
             fetch('https://test.bankstatements.com.au/api/v1/', {
                 method: 'POST',
+                mode: 'no-cors',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'X-API-KEY': 'YO4ONYORIUB17401YYOL4U2F5KGTUYZTXAZ4LFSM',
+                    'Accept':	'application/json'
                   },
-                body:JSON.stringify({username:clientNo, password:pass})
-            }).then((res) => res.json())
-            .then((data) =>  console.log(data))
-            .catch((err)=>console.log(err))
+                body: JSON.stringify({
+                    institution: bankName,
+                    username: clientNo,
+                    password: pass})
+            }).then((response) => response.json())
+            .then((responseData) =>  console.log(responseData))
+            // .catch((err)=>console.log(err))
+
+
     }
     render() {
         const FormItem = Form.Item
@@ -56,6 +68,15 @@ class BankCheck extends React.Component {
                         <h1>Bank Statement</h1>
                     </div>
                     <Form onSubmit={this.handleSubmit}>
+                    <FormItem
+                        label="Choose your bank"
+                        labelCol={{ span:8 }}
+                        wrapperCol={{ span:8 }}
+                    >
+                        <Select value={this.state.bankName} >
+                            <Option value={this.state.bankName}>Bank of Statement</Option>
+                        </Select>
+                    </FormItem>
                     <FormItem
                         label="Client Number"
                         labelCol={{ span:8 }}
