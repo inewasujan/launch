@@ -1,7 +1,7 @@
 import React from 'react'
 import Header from './header'
 import Footer from './footer'
-import { Form, Input, Icon, Button, Select } from 'antd'
+import { Form, Input, Modal, Button, Select } from 'antd'
 
 const { Option } = Select
 class BankCheck extends React.Component {
@@ -49,7 +49,7 @@ class BankCheck extends React.Component {
                     'X-API-KEY': 'YO4ONYORIUB17401YYOL4U2F5KGTUYZTXAZ4LFSM',
                     'Accept':	'application/json',
                     'X-OUTPUT-VERSION': '20170401'
-                  },
+                  },u
                 body: JSON.stringify({
                         "credentials": {
                             "institution": bankName,
