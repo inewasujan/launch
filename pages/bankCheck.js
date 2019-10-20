@@ -36,8 +36,8 @@ class BankCheck extends React.Component {
         // const inst = bank_of_statements;
         const bankName = this.state.bankName
         const clientNo = this.state.clientNumber
-        const pass = this.state.password;
-        console.log("Submitted Values: " + bankName + " " + clientNo + " " + pass);
+        const pass = this.state.password;pass
+        console.log("Submitted Values: " + bankName + " " + clientNo + " "  );
 
         //post
 
@@ -47,12 +47,16 @@ class BankCheck extends React.Component {
                 headers: {
                     'Content-Type': 'application/json',
                     'X-API-KEY': 'YO4ONYORIUB17401YYOL4U2F5KGTUYZTXAZ4LFSM',
-                    'Accept':	'application/json'
+                    'Accept':	'application/json',
+                    'X-OUTPUT-VERSION': '20170401'
                   },
                 body: JSON.stringify({
-                    institution: bankName,
-                    username: clientNo,
-                    password: pass})
+                        "credentials": {
+                            "institution": bankName,
+                            "username": clientNo,
+                            "password": pass
+                        }
+                })
             }).then((response) => response.json())
             .then((responseData) =>  console.log(responseData))
             // .catch((err)=>console.log(err))
