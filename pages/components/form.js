@@ -28,7 +28,7 @@ const apiKey = "2150afc4979c5f12fcacd67a09d13fa49fa6100f";
 //   }
 // });
 
-const iframe = 'https://test.bankstatements.com.au/iframe/start/LNCP'
+
 
 // RegExpression format provided
 const validEmailRegex = RegExp(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i);
@@ -65,41 +65,14 @@ class LaunchForm extends React.Component {
         emailAddress: '',
         mobileNumber: '',
       },
-      ModalText: 'Content of the modal',
-      visible: false,
-      confirmLoading: false,
+      
 
     };
     this.submitEvent = this.submitEvent.bind(this);
     this.handleChange = this.handleChange.bind(this);
   };
 
-  showModal = () => {
-    this.setState({
-      visible: true,
-    });
-  };
-
-  handleOk = () => {
-    this.setState({
-      ModalText: 'The modal will be closed after two seconds',
-      confirmLoading: true,
-    });
-    setTimeout(() => {
-      this.setState({
-        visible: false,
-        confirmLoading: false,
-      });
-    }, 2000);
-  };
-
-  handleCancel = () => {
-    console.log('Clicked cancel button');
-    this.setState({
-      visible: false,
-    });
-  };
-
+  
   // Fire every time we enter a character into one of the inputs on our form
   handleChange(event) {
     event.preventDefault();
@@ -342,17 +315,7 @@ class LaunchForm extends React.Component {
             <Button size='large' style={{ marginLeft: 8 }} onClick={this.backOnclick.bind(this)}>
               Redo
           </Button>
-          <Button type="primary" onClick={this.showModal}>Bank Statement</Button>
-          <Modal
-          title="Title"
-          visible={visible}
-          onOk={this.handleOk}
-          confirmLoading={confirmLoading}
-          onCancel={this.handleCancel}
-          iframe={iframe}
-        >
-          <p>{ModalText}</p>
-        </Modal>
+         
           </FormItem>
         </Form>
       </div>
